@@ -1,4 +1,4 @@
-import { product, Product } from "@/interfaces";
+import { product} from "@/interfaces";
 import React from "react";
 import {
   Card,

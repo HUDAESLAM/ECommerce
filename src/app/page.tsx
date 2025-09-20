@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { LucidePackage2, Package, Package2, ShoppingBag, ShoppingBasket, ShoppingCart } from "lucide-react";
+import { LucidePackage2, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {

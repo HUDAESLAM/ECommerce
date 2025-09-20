@@ -1,6 +1,4 @@
 import { UserResponse } from "./../interfaces/authInterface";
-import  {JWT}  from "next-auth/jwt"
-import NextAuth, { User } from "next-auth";
 
 declare module "next-auth" {
   interface Session {
@@ -13,5 +11,5 @@ declare module "next-auth" {
 }
 
 declare module "next-auth/jwt" {
-  interface JWT extends User {}
+  interface JWT extends User {iat?: number;}
 }

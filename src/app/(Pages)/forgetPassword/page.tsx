@@ -43,19 +43,24 @@ export default function ForgotPasswordPage() {
       setMessage(" Check your email for reset instructions.");
       console.log(res.data);
 
-      
+
       setTimeout(() => {
         router.push("/verify-code");
       }, 1000);
-    } catch (err: any) {
-      console.error(err);
-      setError(
-        err.response?.data?.message || "Something went wrong. Try again!"
-      );
+    } catch (err: unknown) {
+       // Type-safe check
+      if (typeof err === "object" && err !== null && "response" in err) {
+        const e = err as { response?: { data?: { message?: string } } };
+        setError(e.response?.data?.message || " Invalid Email.");
+      } else {
+        setError(" Invalid Email."); 
+      }
     } finally {
       setLoading(false);
     }
   };
+
+  
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center dark:bg-gray-900">
@@ -75,11 +80,10 @@ export default function ForgotPasswordPage() {
             <input
               type="email"
               {...register("email")}
-              className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${
-                errors.email
+              className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${errors.email
                   ? "border-red-500 focus:ring-red-400"
                   : "border-gray-300 focus:ring-gray-400"
-              } dark:bg-gray-700 dark:text-gray-100`}
+                } dark:bg-gray-700 dark:text-gray-100`}
               placeholder="Enter your email"
             />
             {errors.email && (

@@ -42,10 +42,11 @@ export default function CartContextProvider({
       setIsLoading(false);
     }
   }
+
+
   useEffect(() => {
-    
     getCart();
-  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [session.status]);
 
 

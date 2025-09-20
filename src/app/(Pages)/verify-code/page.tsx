@@ -44,12 +44,17 @@ export default function VerifyResetCodePage() {
       );
 
       setMessage("Code verified successfully!");
-      
+
       setTimeout(() => {
         router.push("/reset-password");
       }, 1000);
-    } catch (err: any) {
-      setError(err.response?.data?.message || "❌ Invalid or expired reset code.");
+    } catch (err: unknown) {
+      if (typeof err === "object" && err !== null && "response" in err) {
+        const e = err as { response?: { data?: { message?: string } } };
+        setError(e.response?.data?.message || " Invalid or expired reset code.");
+      } else {
+        setError(" Invalid or expired reset code.");
+      }
     } finally {
       setLoading(false);
     }
@@ -77,11 +82,10 @@ export default function VerifyResetCodePage() {
             <input
               type="text"
               {...register("resetCode")}
-              className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${
-                errors.resetCode
+              className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${errors.resetCode
                   ? "border-red-500 focus:ring-red-400"
                   : "border-gray-300 focus:ring-blue-400"
-              } dark:bg-gray-700 dark:text-gray-100`}
+                } dark:bg-gray-700 dark:text-gray-100`}
               placeholder="Enter the 6-digit code"
             />
             {errors.resetCode && (
