@@ -5,7 +5,7 @@ import React from 'react'
 
 export default async function Brands() {
 
-  const res = await fetch('http://localhost:3000/secureAPI/brands')
+  const res = await fetch(`${process.env.URL_API}/brands`)
   const json = await res.json();
   const data: Brand[] = json.data;
 

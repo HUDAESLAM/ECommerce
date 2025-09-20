@@ -1,6 +1,6 @@
 import  { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import {  FaildUserResponse, SuccessLoginResponse } from "./interfaces";
+import {  FaildUserResponse, SuccessLoginResponse, UserResponse } from "./interfaces";
 
 export const authOptions : AuthOptions = {
   providers: [
@@ -51,7 +51,7 @@ export const authOptions : AuthOptions = {
       return token;
     },
     session: ({ session, token }) => {
-      session.user = token.user;
+      session.user = token.user as UserResponse;
       return session;
     },
   },

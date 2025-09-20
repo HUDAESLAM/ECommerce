@@ -1,4 +1,4 @@
-import { product} from "@/interfaces";
+import { Product } from "@/interfaces";
 import React from "react";
 import {
   Card,
@@ -14,13 +14,13 @@ import AddToCart from "@/app/_Components/AddToCart/AddToCart";
 
 export default async function Products() {
   const response = await fetch(
-    "http://localhost:3000/secureAPI/products",
+    `${process.env.URL_API}/products`,
     {
       method: "GET",
     }
   );
   const json = await response.json();
-  const data: product[] = json.data;
+  const data: Product[] = json.data;
   console.log(data);
 
   return (

@@ -34,13 +34,13 @@ export default function Cart() {
       {
         method: "DELETE",
         headers: {
-          token:token+'',
+          token: token + '',
         },
       }
     );
 
     const data: CartResponse = await res.json();
-    
+
     if (data.status === "success") {
       toast.success("Product Removed Successfully");
       setCartData(data);
@@ -53,14 +53,14 @@ export default function Cart() {
       removeCartItem(productId);
     } else {
       setIsUpdating(productId);
-      const token =await  getUserToken()
+      const token = await getUserToken()
       const res = await fetch(
         "https://ecommerce.routemisr.com/api/v1/cart/" + productId,
         {
           method: "PUT",
           body: JSON.stringify({ count }),
           headers: {
-            token:token + '',
+            token: token + '',
             "Content-Type": "application/json",
           },
         }
@@ -81,7 +81,7 @@ export default function Cart() {
     const res = await fetch("https://ecommerce.routemisr.com/api/v1/cart", {
       method: "DELETE",
       headers: {
-        token:token + '',
+        token: token + '',
       },
     });
     const data: CartResponse = await res.json();
@@ -91,7 +91,7 @@ export default function Cart() {
     setIsClearing(false);
   }
 
-  
+
 
   return (
     <>
@@ -218,7 +218,10 @@ export default function Cart() {
                       </span>
                     </div>
 
-                    <DialogDetail cartId={cartData?.cartId} />
+                    {cartData?.data?.cartId && (
+                      <DialogDetail cartId={cartData.data.cartId} />
+                    )}
+
 
                     <button className="w-full mt-5 h-11 rounded-xl border hover:bg-accent cursor-pointer">
                       <Link href={"/products"}>Continue Shopping</Link>

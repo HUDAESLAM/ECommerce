@@ -39,7 +39,7 @@ export default function VerifyResetCodePage() {
 
     try {
       await axios.post(
-        "https://ecommerce.routemisr.com/api/v1/auth/verifyResetCode",
+        `${process.env.URL_API}/auth/verifyResetCode`,
         { resetCode: data.resetCode }
       );
 

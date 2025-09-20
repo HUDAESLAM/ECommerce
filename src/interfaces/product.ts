@@ -1,7 +1,7 @@
 import { Brand } from "./brand";
 import { Category, SubCategory } from "./category";
 
-export interface product {
+export interface Product {
   _id: string;
   id: string;
   title: string;

@@ -7,7 +7,7 @@ export default async function CategoryDetails({
   params: { categoryId: string };
 }) {
   const res = await fetch(
-    `https://ecommerce.routemisr.com/api/v1/categories/${params.categoryId}/subcategories`
+    `${process.env.URL_API}/categories/${params.categoryId}/subcategories`
   );
   const { data }: { data: SubCategory[] } = await res.json();
 

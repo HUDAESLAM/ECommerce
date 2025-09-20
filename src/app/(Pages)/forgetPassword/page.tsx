@@ -36,7 +36,7 @@ export default function ForgotPasswordPage() {
 
     try {
       const res = await axios.post(
-        "https://ecommerce.routemisr.com/api/v1/auth/forgotPasswords",
+        `${process.env.URL_API}/auth/forgotPasswords`,
         { email: data.email }
       );
 

@@ -1,4 +1,11 @@
+import { Product } from "./product";
+
 export interface Order {
+  product: {
+    imageCover: string;
+    title: string;
+    price: number;
+  };
   _id: string;
   user: string;
   taxPrice: number;
@@ -17,7 +24,7 @@ export interface Order {
 
 export interface CartItem {
   _id: string;
-  product: string; 
+  product: Product; 
   count: number;
   price: number;
 }

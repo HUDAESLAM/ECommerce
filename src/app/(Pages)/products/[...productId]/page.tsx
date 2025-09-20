@@ -9,16 +9,16 @@ import {
 } from "@/components/ui/card";
 import ProductSlider from "@/app/_Components/carasoul/ProductSlider";
 import AddToCart from "@/app/_Components/AddToCart/AddToCart";
-import { product} from "@/interfaces";
+import { Product} from "@/interfaces";
 
 export default async function ProductDetails({ params }: { params: Params }) {
   const { productId } =  params;
 
 
   const response = await fetch(
-    `https://ecommerce.routemisr.com/api/v1/products/${productId}`
+    `${process.env.URL_API}/products/${productId}`
   );
-  const  {data : productData } : {data : product}  = await response.json();
+  const  {data : productData } : {data : Product}  = await response.json();
 
   console.log(productData);
 

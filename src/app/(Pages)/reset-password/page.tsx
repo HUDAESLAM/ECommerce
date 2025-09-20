@@ -19,7 +19,7 @@ export default function ResetPasswordPage() {
     setError("");
 
     const res = await fetch(
-      "https://ecommerce.routemisr.com/api/v1/auth/resetPassword",
+      `${process.env.URL_API}/auth/resetPassword`,
       {
         method: "PUT",
         headers: {

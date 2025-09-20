@@ -5,14 +5,14 @@ import Link from "next/link";
 
 
 export default async function CategoryDetails() {
-  const response = await fetch("http://localhost:3000/secureAPI/category");
+  const response = await fetch(`${process.env.URL_API}/categories`);
   const json = await response.json();
   const data: Category[] = json.data; 
 
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 ">
-        {data.map((category) => (
+        {data?.map((category) => (
           <Link href={"/categories/" + category._id} key={category._id}>
             <>
               <div

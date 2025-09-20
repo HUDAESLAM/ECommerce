@@ -31,7 +31,7 @@ export default function CartContextProvider({
   async function getCart() {
     if (session.status == 'authenticated') {
       setIsLoading(true);
-      const res = await fetch("http://localhost:3000/secureAPI/get-cart");
+      const res = await fetch(`${process.env.URL_API}/cart`);
       const data: CartResponse = await res.json();
 
       setCartData(data);

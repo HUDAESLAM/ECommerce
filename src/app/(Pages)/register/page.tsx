@@ -40,7 +40,7 @@ export default function RegisterPage() {
     setSuccess("");
 
     try {
-      const res = await fetch("https://ecommerce.routemisr.com/api/v1/auth/signup", {
+      const res = await fetch(`${process.env.URL_API}/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

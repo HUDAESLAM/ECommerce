@@ -1,4 +1,4 @@
-import { product } from "./product";
+import { Product } from "./product";
 
 export interface CartData {
   _id: string;
@@ -8,12 +8,13 @@ export interface CartData {
   updatedAt: string;
   __v: number;
   totalCartPrice: number;
+  cartId: string;
 }
 
 export interface CartProduct {
   count: number;
   _id: string;
-  product: product;
+  product: Product;
   price: number;
   
 }
