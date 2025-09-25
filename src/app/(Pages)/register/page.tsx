@@ -42,16 +42,15 @@ export default function RegisterPage() {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/auth/signup`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
+        headers: { "Content-Type": "application/json" },
       });
-
-
       
       const result = await res.json();
 
       if(result.message == 'success'){
       router.push("/login");
+        return;
     }
 
       if (!res.ok) {
