@@ -27,6 +27,7 @@ export default function DialogDetail({ cartId }: { cartId: string  }) {
   const cityInput = useRef<HTMLInputElement | null>(null);
   const phoneInput = useRef<HTMLInputElement | null>(null);
   const router = useRouter();
+  
   // CheckOut
   async function checkOutSession(cartId: string) {
     setLoadig(true)
@@ -120,15 +121,15 @@ console.log(data);
           <div className="grid gap-4">
             <div className="grid gap-3">
               <Label htmlFor="city">City</Label>
-              <Input id="city" ref={cityInput} />
+              <Input id="city" ref={cityInput} required />
             </div>
             <div className="grid gap-3">
               <Label htmlFor="details">Details</Label>
-              <Input id="details" ref={detailsInput} />
+              <Input id="details" ref={detailsInput} required/>
             </div>
             <div className="grid gap-3">
               <Label htmlFor="phone">phone</Label>
-              <Input id="phone" ref={phoneInput} />
+              <Input id="phone" ref={phoneInput} required/>
             </div>
 
 
@@ -138,7 +139,7 @@ console.log(data);
               <Button variant="outline" className='cursor-pointer'>Cancel</Button>
             </DialogClose>
             <Button
-              type="button"
+              type="submit"
               className="cursor-pointer"
               onClick={CashPayment}
             >

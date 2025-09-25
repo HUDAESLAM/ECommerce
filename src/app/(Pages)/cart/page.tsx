@@ -92,10 +92,11 @@ export default function Cart() {
   console.log("Cart Data 👉", cartData);
 
   useEffect(() => {
-    if (typeof cartData?.data.products[0]?.product === "string" || cartData == null) {
-      getCart();
-    }
-  }, [cartData, getCart]);
+    if (!cartData) {
+    getCart();
+  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
 
   return (
