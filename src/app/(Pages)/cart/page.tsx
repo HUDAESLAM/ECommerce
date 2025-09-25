@@ -5,7 +5,7 @@ import { formatCurrency } from "@/Helpers/formatPrice";
 import { CartResponse } from "@/interfaces/cart";
 import { Loader2, Trash2Icon } from "lucide-react";
 import Image from "next/image";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -20,9 +20,6 @@ export default function Cart() {
   const [isUpdating, setIsUpdating] = useState<string | null>(null);
   const [isClearing, setIsClearing] = useState<boolean>(false);
 
-  if (typeof cartData?.data.products[0]?.product === "string" || cartData == null) {
-    getCart();
-  }
 
   // Remove
   async function removeCartItem(productId: string) {
@@ -68,7 +65,7 @@ export default function Cart() {
 
       const data: CartResponse = await res.json();
       console.log(data);
-      
+
       if (data.status === "success") {
         toast.success("Cart updated successfully");
         setCartData(data);
@@ -92,8 +89,13 @@ export default function Cart() {
     }
     setIsClearing(false);
   }
-console.log("Cart Data 👉", cartData);
+  console.log("Cart Data 👉", cartData);
 
+  useEffect(() => {
+    if (typeof cartData?.data.products[0]?.product === "string" || cartData == null) {
+      getCart();
+    }
+  }, [cartData, getCart]);
 
 
   return (
@@ -221,7 +223,7 @@ console.log("Cart Data 👉", cartData);
                       </span>
                     </div>
 
-                    <DialogDetail cartId={cartData!.cartId!}/>
+                    <DialogDetail cartId={cartData!.cartId!} />
 
 
                     <button className="w-full mt-5 h-11 rounded-xl border hover:bg-accent cursor-pointer">
