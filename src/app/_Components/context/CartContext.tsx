@@ -1,4 +1,5 @@
 "use client";
+import { getUserToken } from "@/Helpers/getUserToken/getUserToken";
 import { CartResponse } from "@/interfaces";
 import { useSession } from "next-auth/react";
 import { createContext, ReactNode, useEffect, useState } from "react";
@@ -27,11 +28,17 @@ export default function CartContextProvider({
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const session = useSession()
   // const [userId, setUserId] = useState<string>('');
-
   async function getCart() {
+    setIsLoading(true);
+    const token = await getUserToken();
     if (session.status == 'authenticated') {
-      setIsLoading(true);
-      const res = await fetch(`${process.env.URL_API}/cart`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/cart/`,
+          {
+            headers: {
+              token: token + "",
+            },
+          }
+        );
       const data: CartResponse = await res.json();
 
       setCartData(data);
@@ -42,14 +49,10 @@ export default function CartContextProvider({
       setIsLoading(false);
     }
   }
-
-
   useEffect(() => {
     getCart();
     // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [session.status]);
-
-
   return (
     <>
       <CartContext.Provider

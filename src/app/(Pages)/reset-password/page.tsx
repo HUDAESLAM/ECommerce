@@ -19,7 +19,7 @@ export default function ResetPasswordPage() {
     setError("");
 
     const res = await fetch(
-      `${process.env.URL_API}/auth/resetPassword`,
+      `${process.env.NEXT_PUBLIC_URL_API}/auth/resetPassword`,
       {
         method: "PUT",
         headers: {

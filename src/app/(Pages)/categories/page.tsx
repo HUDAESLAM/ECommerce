@@ -5,7 +5,7 @@ import Link from "next/link";
 
 
 export default async function CategoryDetails() {
-  const response = await fetch(`${process.env.URL_API}/categories`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/categories`);
   const json = await response.json();
   const data: Category[] = json.data; 
 

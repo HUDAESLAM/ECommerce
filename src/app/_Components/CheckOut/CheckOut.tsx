@@ -18,7 +18,9 @@ import toast from 'react-hot-toast'
 import { useRouter } from "next/navigation";
 import { getUserToken } from '@/Helpers/getUserToken/getUserToken'
 
-export default function DialogDetail({ cartId }: { cartId: string | null }) {
+export default function DialogDetail({ cartId }: { cartId: string  }) {
+  console.log("Dialog cartId:", cartId);
+
   const [loading, setLoadig] = useState<boolean>(false);
   const [Load, setLoad] = useState<boolean>(false);
   const detailsInput = useRef<HTMLInputElement | null>(null);
@@ -36,7 +38,7 @@ export default function DialogDetail({ cartId }: { cartId: string | null }) {
     }
     console.log(shippingAddress);
     const res = await fetch(
-      `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=http://localhost:3000`,
+      `${process.env.NEXT_PUBLIC_URL_API}/orders/checkout-session/${cartId}?url=http://localhost:3000`,
       {
         method: "POST",
         body: JSON.stringify({ shippingAddress }),
@@ -47,6 +49,7 @@ export default function DialogDetail({ cartId }: { cartId: string | null }) {
       }
     );
     const data = await res.json();
+console.log(data);
 
     if (data.status == "success") {
       location.href = data.session.url
@@ -56,6 +59,10 @@ export default function DialogDetail({ cartId }: { cartId: string | null }) {
 
   // Cash
   async function CashPayment() {
+    if (!cartId) {
+    toast.error("Cart ID is missing!");
+    return;
+  }
     setLoad(true);
     const shippingAddress = {
       details: detailsInput.current?.value,
@@ -67,7 +74,7 @@ export default function DialogDetail({ cartId }: { cartId: string | null }) {
         const token = await getUserToken()
 
       const res = await fetch(
-        `https://ecommerce.routemisr.com/api/v1/orders/${cartId}`,
+        `${process.env.NEXT_PUBLIC_URL_API}/orders/${cartId}`,
         {
           method: "POST",
           body: JSON.stringify({ shippingAddress }),
@@ -86,7 +93,7 @@ export default function DialogDetail({ cartId }: { cartId: string | null }) {
         localStorage.setItem("lastOrder", JSON.stringify(data.data));
         router.push("/cash");
       } else {
-        toast("Something went wrong with cash order");
+        toast.error(data.message);
       }
     } catch (error) {
       console.error("Error creating cash order:", error);

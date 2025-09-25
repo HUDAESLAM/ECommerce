@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -29,37 +29,32 @@ export default function ForgotPasswordPage() {
     resolver: zodResolver(forgotPasswordSchema),
   });
 
-  const onSubmit = async (data: ForgotPasswordFormData) => {
+  const onSubmit = async (formData: ForgotPasswordFormData) => {
     setLoading(true);
     setMessage(null);
     setError(null);
 
     try {
       const res = await axios.post(
-        `${process.env.URL_API}/auth/forgotPasswords`,
-        { email: data.email }
+        `${process.env.NEXT_PUBLIC_URL_API}/auth/forgotPasswords`,
+        { email: formData.email }
       );
-
-      setMessage(" Check your email for reset instructions.");
+      setMessage("Check your email for reset instructions.");
       console.log(res.data);
-
-
       setTimeout(() => {
         router.push("/verify-code");
       }, 1000);
     } catch (err: unknown) {
-       // Type-safe check
-      if (typeof err === "object" && err !== null && "response" in err) {
-        const e = err as { response?: { data?: { message?: string } } };
-        setError(e.response?.data?.message || " Invalid Email.");
+      if (axios.isAxiosError(err)) {
+        const axiosError = err as AxiosError<{ message: string }>;
+        setError(axiosError.response?.data?.message || "Something went wrong");
       } else {
-        setError(" Invalid Email."); 
+        setError("Unexpected error occurred");
       }
     } finally {
       setLoading(false);
     }
   };
-
   
 
   return (

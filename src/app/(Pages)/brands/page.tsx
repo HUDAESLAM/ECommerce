@@ -5,7 +5,7 @@ import React from 'react'
 
 export default async function Brands() {
 
-  const res = await fetch(`${process.env.URL_API}/brands`)
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/brands`)
   const json = await res.json();
   const data: Brand[] = json.data;
 

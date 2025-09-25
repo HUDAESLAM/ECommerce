@@ -12,7 +12,7 @@ export default function AllOrders() {
   async function getOrder() {
   try {
     const userId = localStorage.getItem("userId");
-    const res = await fetch(`${process.env.URL_API}/orders/${userId}/`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/orders/${userId}/`);
     const data: Order[] = await res.json();
     setOrders(data);
     console.log(data);

@@ -16,7 +16,7 @@ export default async function ProductDetails({ params }: { params: Params }) {
 
 
   const response = await fetch(
-    `${process.env.URL_API}/products/${productId}`
+    `${process.env.NEXT_PUBLIC_URL_API}/products/${productId}`
   );
   const  {data : productData } : {data : Product}  = await response.json();
 

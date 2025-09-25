@@ -39,7 +39,7 @@ export default function VerifyResetCodePage() {
 
     try {
       await axios.post(
-        `${process.env.URL_API}/auth/verifyResetCode`,
+        `${process.env.NEXT_PUBLIC_URL_API}/auth/verifyResetCode`,
         { resetCode: data.resetCode }
       );
 

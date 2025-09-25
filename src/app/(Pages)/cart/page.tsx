@@ -30,7 +30,7 @@ export default function Cart() {
     const token = await getUserToken()
 
     const res = await fetch(
-      `${process.env.URL_API}/cart/` + productId,
+      `${process.env.NEXT_PUBLIC_URL_API}/cart/` + productId,
       {
         method: "DELETE",
         headers: {
@@ -55,7 +55,7 @@ export default function Cart() {
       setIsUpdating(productId);
       const token = await getUserToken()
       const res = await fetch(
-        "https://ecommerce.routemisr.com/api/v1/cart/" + productId,
+        `${process.env.NEXT_PUBLIC_URL_API}/cart/${productId}`,
         {
           method: "PUT",
           body: JSON.stringify({ count }),
@@ -67,6 +67,8 @@ export default function Cart() {
       );
 
       const data: CartResponse = await res.json();
+      console.log(data);
+      
       if (data.status === "success") {
         toast.success("Cart updated successfully");
         setCartData(data);
@@ -78,7 +80,7 @@ export default function Cart() {
   async function clearCartItem() {
     setIsClearing(true);
     const token = await getUserToken()
-    const res = await fetch("https://ecommerce.routemisr.com/api/v1/cart", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/cart`, {
       method: "DELETE",
       headers: {
         token: token + '',
@@ -90,6 +92,7 @@ export default function Cart() {
     }
     setIsClearing(false);
   }
+console.log("Cart Data 👉", cartData);
 
 
 
@@ -218,9 +221,7 @@ export default function Cart() {
                       </span>
                     </div>
 
-                    {cartData?.data?.cartId && (
-                      <DialogDetail cartId={cartData.data.cartId} />
-                    )}
+                    <DialogDetail cartId={cartData!.cartId!}/>
 
 
                     <button className="w-full mt-5 h-11 rounded-xl border hover:bg-accent cursor-pointer">

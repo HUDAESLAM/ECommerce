@@ -4,7 +4,7 @@ import { getUserToken } from "@/Helpers/getUserToken/getUserToken";
 
 export async function AddToCartAction(productId: string) {
   const token = await getUserToken();
-  const response = await fetch("https://ecommerce.routemisr.com/api/v1/cart", {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/cart`, {
     method: "POST",
     body: JSON.stringify({ productId }),
     headers: {

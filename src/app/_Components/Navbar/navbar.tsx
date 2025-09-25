@@ -13,11 +13,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+
 export default function Navbar() {
   const { isLoading, cartData } = useContext(CartContext);
   const session = useSession();
   const [menuOpen, setMenuOpen] = useState(false);
-
+  
+  console.log(cartData);
+  
   return (
     <nav className="py-3 bg-gray-50 shadow font-semibold relative">
       <div className="container flex items-center justify-between">
@@ -157,6 +160,7 @@ export default function Navbar() {
                   <Badge className="size-4 rounded-full absolute -top-1 -end-1">
                     <span className="text-[10px]">
                       {isLoading ? <Loader className="animate-spin" /> : cartData?.numOfCartItems}
+                      
                     </span>
                   </Badge>
                 </Link>

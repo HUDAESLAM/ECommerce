@@ -8,7 +8,7 @@ export default async function page({
   params: { brandId: string };
 }) {
   const res = await fetch(
-    `${process.env.URL_API}/brands/${params.brandId}`
+    `${process.env.NEXT_PUBLIC_URL_API}/brands/${params.brandId}`
   );
 
   const  {data} : BrandResponse  = await res.json();

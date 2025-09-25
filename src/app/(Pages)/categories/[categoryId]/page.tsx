@@ -7,7 +7,7 @@ export default async function CategoryDetails({
   params: { categoryId: string };
 }) {
   const res = await fetch(
-    `${process.env.URL_API}/categories/${params.categoryId}/subcategories`
+    `${process.env.NEXT_PUBLIC_URL_API}/categories/${params.categoryId}/subcategories`
   );
   const { data }: { data: SubCategory[] } = await res.json();
 

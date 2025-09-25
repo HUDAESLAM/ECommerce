@@ -14,7 +14,7 @@ import AddToCart from "@/app/_Components/AddToCart/AddToCart";
 
 export default async function Products() {
   const response = await fetch(
-    `${process.env.URL_API}/products`,
+    `${process.env.NEXT_PUBLIC_URL_API}/products`,
     {
       method: "GET",
     }
