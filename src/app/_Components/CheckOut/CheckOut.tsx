@@ -39,7 +39,7 @@ export default function DialogDetail({ cartId }: { cartId: string  }) {
     }
     console.log(shippingAddress);
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_URL_API}/orders/checkout-session/${cartId}?url=${process.env.NEXTAUTH_URL}`,
+      `${process.env.NEXT_PUBLIC_URL_API}/orders/checkout-session/${cartId}?url=https://e-commerce1-ashen.vercel.app`,
       {
         method: "POST",
         body: JSON.stringify({ shippingAddress }),
