@@ -39,7 +39,7 @@ export default function DialogDetail({ cartId }: { cartId: string  }) {
     }
     console.log(shippingAddress);
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_URL_API}/orders/checkout-session/${cartId}?url=${process.env.NEXT_PUBLIC_URL_API}`,
+      `${process.env.NEXT_PUBLIC_URL_API}/orders/checkout-session/${cartId}?url=${process.env.NEXTAUTH_URL}`,
       {
         method: "POST",
         body: JSON.stringify({ shippingAddress }),
